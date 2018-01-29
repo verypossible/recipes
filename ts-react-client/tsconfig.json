@@ -27,6 +27,24 @@
     "removeComments": true,
     "skipLibCheck": true
   },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true,
+    "babelOptions": {
+      "babelrc": false,
+      "presets": [
+        ["env", {
+          "loose": true,
+          "modules": false,
+        }],
+        ["react"]
+      ],
+      "plugins": [
+        "babel-plugin-styled-components",
+        "react-hot-loader/babel"
+      ]
+    }
+  },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }

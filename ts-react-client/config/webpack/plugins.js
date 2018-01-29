@@ -5,6 +5,7 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import GitRevisionPlugin from 'git-revision-webpack-plugin'
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import InlineManifestWebpackPlugin from 'inline-manifest-webpack-plugin'
 import RollbarSourceMapPlugin from 'rollbar-sourcemap-webpack-plugin'
@@ -60,6 +61,7 @@ const base = [
 const development = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new HardSourceWebpackPlugin(),
   new webpack.LoaderOptionsPlugin({
     debug: true
   }),

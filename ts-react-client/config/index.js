@@ -60,7 +60,7 @@ const config = {
 // ------------------------------------
 // Environment
 // ------------------------------------
-config.devUrl = `${config.server_protocol}://${config.server_host}:${
+config.server = `${config.server_protocol}://${config.server_host}:${
   config.server_port
 }`
 
