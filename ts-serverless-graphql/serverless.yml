@@ -1,0 +1,113 @@
+service: web-gerbil-graphql
+
+frameworkVersion: ">=1.21.0 <2.0.0"
+
+package:
+  include:
+    - lib/**
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+  profile: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:DescribeStream
+        - dynamodb:ListStreams
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 4000
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: projects
+            sources: [seeds/projects.json]
+          - table: forecasts
+            sources: [seeds/forecasts.json]
+
+functions:
+  graphql:
+    handler: src/handler.graphql
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+  playground:
+    handler: src/handler.playground
+    events:
+    - http:
+        path: playground
+        method: get
+        cors: true
+  graphiql:
+    handler: src/handler.graphiql
+    events:
+    - http:
+        path: graphiql
+        method: get
+        cors: true
+
+resources:
+  Resources:
+    ProjectsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: projects
+    ForecastsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: projectId
+            KeyType: HASH
+          -
+            AttributeName: date
+            KeyType: RANGE
+        AttributeDefinitions:
+          -
+            AttributeName: projectId
+            AttributeType: S
+          -
+            AttributeName: date
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: forecasts

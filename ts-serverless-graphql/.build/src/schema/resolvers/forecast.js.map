@@ -1,0 +1,1 @@
+{"version":3,"file":"forecast.js","sourceRoot":"","sources":["../../../../src/schema/resolvers/forecast.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,SAAS,EAAE;QACT,YAAY,EAAE,CAAC,MAAM,EAAE,IAAI,EAAE,EAAE,OAAO,EAAE,EAAE,EAAE,CAAC,OAAO,CAAC,YAAY,EAAE;KACpE;CACF,CAAA"}
