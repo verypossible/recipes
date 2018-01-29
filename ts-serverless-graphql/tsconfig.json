@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es6", "dom", "esnext.asynciterable"],
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "pretty": true,
+    "sourceMap": true,
+    "noImplicitReturns": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules", ".build", "webpack"],
+  "types": ["node"]
+}
